@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  data_ingestion:
+    build:
+      context: ..
+      dockerfile: docker/data_ingestion.Dockerfile
+    volumes:
+      - ./services/data_ingestion:/app
+
+  processing_core:
+    build:
+      context: ..
+      dockerfile: docker/processing_core.Dockerfile
+    volumes:
+      - ./services/processing_core:/app
+      - ./rust_module:/rust_module
+
+  visualization:
+    build:
+      context: ..
+      dockerfile: docker/visualization.Dockerfile
+    volumes:
+      - ./services/visualization:/app
